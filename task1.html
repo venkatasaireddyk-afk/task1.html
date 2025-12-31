@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <p id="display"></p>
+    <ul id="items"></ul>
+
+    <hr />
+    <p>Student Names scored Marks greater than 60</p>
+    <ul id="item60"></ul>
+    <hr />
+    <p>Number of Students in each department</p>
+    <p id="exp11"></p>
+    <p id="total"></p>
+    <hr />
+    <p id="highmarks"></p>
+    <hr />
+    <p id="avstd"></p>
+    <hr />
+    <p>Display only cse Students</p>
+    <ul id="cse12"></ul>
+    <hr />
+    <p>arranging elements in descending order using marks</p>
+    <ul id="desce"></ul>
+    <hr />
+    <table>
+      <tr>
+        <th>Names</th>
+        <th>Marks</th>
+        <th>Department</th>
+      </tr>
+      <tr id="r1"></tr>
+      <tr id="r2"></tr>
+      <tr id="r3"></tr>
+      <tr id="r4"></tr>
+    </table>
+    <script>
+      const students = [
+        { id: 1, name: "Amit", marks: 78, department: "CSE" },
+
+        { id: 2, name: "Priya", marks: 92, department: "ECE" },
+
+        { id: 3, name: "Rahul", marks: 45, department: "MECH" },
+
+        { id: 4, name: "Sneha", marks: 66, department: "CSE" },
+
+        { id: 5, name: "Kiran", marks: 88, department: "ECE" },
+
+        { id: 6, name: "Ajay", marks: 58, department: "CSE" },
+
+        { id: 7, name: "Munna", marks: 38, department: "EEE" },
+
+        { id: 8, name: "Naresh", marks: 48, department: "CSE" },
+
+        { id: 9, name: "Karthik", marks: 67, department: "ECE" },
+
+        { id: 10, name: "Ramesh", marks: 48, department: "EEE" },
+      ];
+      const element = document.getElementById("items");
+      document.querySelector("#display").innerHTML = ` Display Content<hr>`;
+      for (let i = 0; i < students.length; i++) {
+        const listitem = document.createElement("li");
+        listitem.textContent = ` ${students[i].id},${students[i].name},${students[i].marks},${students[i].department}`;
+        element.appendChild(listitem);
+      }
+
+      marksGreater60 = students.filter(function (p) {
+        return p.marks > 60;
+      });
+      //Display names greater than 60 marks
+      //   document.querySelector("#display").innerHTML = ` Display greater 60<hr>`;
+      const k = document.getElementById("item60");
+      for (let i = 0; i < marksGreater60.length; i++) {
+        let lists = document.createElement("li");
+        lists.textContent = `${marksGreater60[i].name}`;
+        k.appendChild(lists);
+      }
+
+      // Number of students in each department
+
+      const csestudents = students.reduce(function (count, i) {
+        if (i.department == "CSE") {
+          count += 1;
+        }
+        return count;
+      }, 0);
+      const ecestudents = students.reduce(function (count, i) {
+        if (i.department == "ECE") {
+          count += 1;
+        }
+        return count;
+      }, 0);
+
+      const eeestudents = students.reduce(function (count, i) {
+        if (i.department == "EEE") {
+          count += 1;
+        }
+        return count;
+      }, 0);
+
+      const mechstudents = students.reduce(function (count, i) {
+        if (i.department == "MECH") {
+          count += 1;
+        }
+        return count;
+      }, 0);
+
+      document.getElementById(
+        "total"
+      ).textContent = ` CSE students :${csestudents} ECE students :${ecestudents} EEE students: ${eeestudents} MECH students : ${mechstudents}`;
+
+      //Highest marks
+
+      sortedStudents = students.sort(function (a, b) {
+        return b.marks - a.marks;
+      });
+
+      document.getElementById(
+        "highmarks"
+      ).textContent = `Highest marks in students :${sortedStudents[0].name} and Marks:${sortedStudents[0].marks}`;
+
+      //Average Marks
+      var t2 = 0;
+      for (let i = 0; i < students.length; i++) {
+        t2 += students[i].marks;
+      }
+      const noofstudent = students.length;
+      const average = t2 / noofstudent;
+      console.log(average);
+
+      document.getElementById(
+        "avstd"
+      ).textContent = ` Average marks of all students :${average}`;
+
+      //display cse students
+      CSEstudent = students.filter(function (i) {
+        return i.department === "CSE";
+      });
+
+      const ele = document.getElementById("cse12");
+      for (let i = 0; i < CSEstudent.length; i++) {
+        const li = document.createElement("li");
+        li.textContent = `${CSEstudent[i].id} - ${CSEstudent[i].name} - ${CSEstudent[i].marks} - ${CSEstudent[i].department}`;
+        ele.appendChild(li);
+      }
+      //display list in desecending order using marks
+
+      const ele1 = document.getElementById("desce");
+      for (let i = 0; i < sortedStudents.length; i++) {
+        const li1 = document.createElement("li");
+        li1.textContent = `${sortedStudents[i].id} - ${sortedStudents[i].name} - ${sortedStudents[i].marks} - ${sortedStudents[i].department}`;
+        ele1.appendChild(li1);
+      }
+
+      //update the array by adding object
+
+      students.splice(5, 1, {
+        id: 5,
+        name: "prasad",
+        marks: 100,
+        department: "ECE",
+      });
+      console.log(students[5]);
+
+      //display table
+
+      const m = document.createElement("td");
+      m.textContent = students[0].name;
+      document.getElementById("r1").appendChild(m);
+    </script>
+  </body>
+</html>
